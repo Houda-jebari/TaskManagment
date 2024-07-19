@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $users=User::all();
+         Log::info('Users retrieved:', ['users' => $users]);
+        return response()->json($users, 201);
     }
-
+    
     public function store(Request $request)
     {
         $user = User::create($request->all());
@@ -34,5 +38,17 @@ class UserController extends Controller
     {
         User::destroy($id);
         return response()->json(null, 204);
+    }
+    public function creatProject(Request $request){
+        if (auth()->user()->role !== 'superadmin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+           $validated = $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+          $project = Project::create($validated);
+        return response()->json($project, 201);
+    
+
     }
 }

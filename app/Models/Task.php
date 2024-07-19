@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model
 {
-    protected $attributs = [
+    protected $fillable = [
     'title',
     'description',
     'status',
@@ -33,5 +33,6 @@ class Task extends Model
     {
         return $this->hasMany(SubTask::class);
     }
+    
 
 }

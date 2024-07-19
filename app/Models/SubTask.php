@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SubTask extends Model
 {
+    protected $table = 'subtasks';
+
     use HasFactory;
-     protected $attribute = [
+     protected $fillable = [
         'title',
         'description',
         'status',
         'assigned_user_id',
     ];
-
-    public function task():BelongsTo{
-        return $this->belongsTo(Task::class ,);
+    public function task(): BelongsTo
+    {
+        return $this->belongsTo(Task::class, 'task_id');
     }
      // Relationship: Subtask belongs to a user (assigned user)
     public function assignedUser(): BelongsTo

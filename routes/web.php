@@ -35,7 +35,7 @@ Route::middleware('api')->group(function () {
     Route::resource('projects', ProjectController::class);
     Route::resource('users', UserController::class);
     Route::post('register', [RegisterController::class, 'register']);
-
+    
 });
 
 

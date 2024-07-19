@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('email', 191)->unique();
             $table->string('password', 191);
             $table->enum('role', ['user', 'superadmin'])->default('user'); // Add role field
-
             $table->unsignedBigInteger('assigned_user_id')->nullable(); // Example of new column
             $table->rememberToken();
             $table->timestamps();

@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title',191);
             $table->text('description',191)->nullable();
-            $table->string('status',191);
+            $table->string('status',191)->default('todo');
+;
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('assigned_user_id')->nullable();
             $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade'); // Define foreign key constraint
             $table->dateTime('due_date')->nullable();
             $table->timestamps();
-
         });
     }
 
